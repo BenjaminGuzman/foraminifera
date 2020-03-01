@@ -13,16 +13,36 @@ OUT_SEGMENTED_IMAGES_DIR = "img/segmented"
 OUT_SEGMENTED_CROPPED_IMAGES_DIR = "img/segmented_cropped"
 OUT_SPECIES_IMAGES_DIR = "img/species"
 
+"""
+Main issues here:
+1.- Threshold value in binarize_image
+2.- cv2.fillConvexPoly in get_and_clean_roi sometimes does not fills the area correctly, see github issues
+"""
 
-def binarize_image(image):
-    image = cv2.GaussianBlur(image, (5, 5), 0)  # make smoother contours
+
+def binarize_image(image, threshold=40):
+    """
+    Applies a gaussian blur, converts to grayscale and converts to a bin image
+    :param image: Image to work with
+    :return: binarized image
+    """
+    image = cv2.GaussianBlur(image, (3, 3), 0)  # make smoother contours
     gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # so we can do binarization below
                                                 # empiric threshold
-    ret, image_thresh = cv2.threshold(gray_image, 30, 255, cv2.THRESH_BINARY)  # binarization
+    ret, image_thresh = cv2.threshold(gray_image, threshold, 255, cv2.THRESH_BINARY)  # binarization
+    # the threshold is the problem, 30 - 40 gives good results, look for the correct value
     return image_thresh
 
 
 def get_contours(image_bin, original_image=None):
+    """
+    Applies cv2.findContours on image_bin
+    :param image_bin: image to work with
+    :param original_image: if provided, contours are drawn on top and returned
+    :return: (contours: numpy[], image_with_contours: original_image but with the contours drawn)
+    """
+
+    # image_with_edges = cv2.Canny(image_bin, 100, 200)
     contours, hierarchy = cv2.findContours(image_bin, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
     image_with_contours = None
@@ -33,9 +53,20 @@ def get_contours(image_bin, original_image=None):
 
 
 def get_and_clean_roi(image_bin, original_image):
+    """
+    Gets the contours in the image
+    Selects the biggest one (probably the foraminifera)
+    Applies a mask to crop only the foraminifera from the original_image
+    :param image_bin: bin image, should be the returned from binarize_image
+    :param original_image:
+    :return: The ROI (foraminifera) from the original_image, None if no contours were detected
+    """
     contours, _ = get_contours(image_bin)
 
     contour_areas = [(contour, cv2.contourArea(contour)) for contour in contours]
+
+    if len(contour_areas) == 0:
+        return None
 
     # obtain the greatest contour in the image, possibly the contour of the foraminifera
     max_contour = max(contour_areas, key=lambda contour_tuple: contour_tuple[1])
@@ -54,6 +85,11 @@ def get_and_clean_roi(image_bin, original_image):
 
 
 def clear_images():
+    """
+    Process images inside OUT_SPECIES_IMAGES_DIR
+    to segment the foraminifera species
+    writes all output images to OUT_SPECIES_SEGMENTED_IMAGES_DIR
+    """
     DEBUGGING = False
     MAX_FILES = 10
     i = 0
@@ -80,6 +116,9 @@ def clear_images():
 
             image_roi = get_and_clean_roi(image_bin, image)
 
+            if image_roi is None:
+                continue
+
             if DEBUGGING:
                 cv2.imshow("Original", image)
                 cv2.imshow("Binarized", image_bin)
@@ -99,6 +138,11 @@ def clear_images():
 
 
 def crop_roi_images():
+    """
+    Process images inside OUT_SEGMENTED_IMAGES_DIR
+    to crop (remove extra black) the foraminifera species
+    writes all output images to OUT_SEGMENTED_CROPPED_IMAGES_DIR
+    """
     progress_bar = progressbar.ProgressBar(max_value=progressbar.UnknownLength, redirect_stdout=True)
     i = 0
 
@@ -120,6 +164,8 @@ def crop_roi_images():
             image_bin = binarize_image(image)
 
             contours, _ = get_contours(image_bin)
+            if len(contours) == 0:
+                continue
 
             # get the ROI, the foraminifera contour
             max_contour = max(contours, key=cv2.contourArea)
