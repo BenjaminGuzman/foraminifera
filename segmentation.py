@@ -90,7 +90,7 @@ def clear_images():
     to segment the foraminifera species
     writes all output images to OUT_SPECIES_SEGMENTED_IMAGES_DIR
     """
-    DEBUGGING = False
+    DEBUGGING = True
     MAX_FILES = 10
     i = 0
 
