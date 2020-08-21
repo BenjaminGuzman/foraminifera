@@ -1,8 +1,12 @@
 # IDEA
 .idea/
 
+# Model training files
+*.h5
+
 # images
 img/
+./img/
 
 # tests
 canny*.png
