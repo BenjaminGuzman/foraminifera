@@ -1,0 +1,79 @@
+\documentclass{article}
+
+\usepackage{booktabs}
+\usepackage{biblatex}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{subcaption}
+
+\bibliography{proc.bib}
+
+\begin{document}
+	There were three main stages for the foraminifera identification:
+	\begin{itemize}
+		\item \textbf{Data collection}: Sample images were obtained from two main sources, the NC STATE University~\cite{ncstate2019} and Centro de Estudios Científicos y Tecnológicos No. 2 "Miguel Bernard" (C. E. C. y T. 2). A total of $15, 828$ images were used. In Table \ref{table:images} detailed information is provided.
+		
+		\begin{table}
+			\centering
+			\caption{Number of images used per specie}
+			\label{table:images}
+			\begin{tabular}{|c|c|}
+				\toprule
+				Specie	&	Number of images\\
+				\midrule
+				G. Bulloides	&	2, 848\\
+				N. Dutertrei	&	2, 452\\
+				G. Sacculifer	&	2, 400\\
+				G. Ruber	&	2, 912\\
+				N. Incompta	&	2, 784\\
+				N. Pachyderma	&	2, 432\\
+				\bottomrule
+			\end{tabular}
+		\end{table}
+	
+		\item \textbf{Segmentation and preprocessing}: Once the images were collected a segmentation process was carried out to remove noise and imperfections from the image. Figure~\ref{table:images} shows a comparison between original images and preprocessed. This process was automated with Python and OpenCV~\cite{opencvlibrary}.
+		
+		\begin{figure}
+			\centering
+			\begin{subfigure}[b]{0.4\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{img/normal1.png}
+				\caption{Original image}
+			\end{subfigure}
+			\begin{subfigure}[b]{0.4\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{img/processed1.png}
+				\caption{Segmented image}
+			\end{subfigure}
+			\hfill
+			\centering
+			\begin{subfigure}[b]{0.4\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{img/normal2.png}
+				\caption{Original image}
+			\end{subfigure}
+			\begin{subfigure}[b]{0.4\textwidth}
+				\centering
+				\includegraphics[width=\linewidth]{img/processed2.png}
+				\caption{Segmented image}
+			\end{subfigure}
+			\caption{Original images compared to processed images}
+		\end{figure}
+	
+		\item \textbf{Data exploration and specie identification}: The images were analysed to find useful information or features that could lead to identify which specie the foraminifera belongs to. When doing the analysis it was discovered most foraminifera species have common features that can make the neural network model more complex, which is what is needed to really obtain features that differentiate one specie from another and omit the common ones.
+		
+		Despite that, a simple neural network with 6 hidden layers was tried, but the results were not the expected as the accuracy of the model was about $16\%$ after the first epoch, and small improvements in subsequent epochs.
+		
+		\begin{figure}
+			\includegraphics[width=\linewidth]{img/elbow.png}
+			\caption{Elbow graph}
+			\label{fig:elbow}
+		\end{figure}
+		
+		Supervised machine learning was used because every image on the dataset was labelled. Despite that, it was also decided to try with unsupervised machine learning, however when using the elbow method to identify the optimal number of clusters,  what was discovered previously was confirmed. In Figure~\ref{fig:elbow} a graph obtained from the elbow method, shows that, indeed, there are quite a few common features between species.
+		
+		From that it is concluded that using a simple neural network model has not good results, hence, hyper parameters should be modified or/and images should have better preprocessing.
+	\end{itemize}
+
+	\printbibliography
+\end{document}
