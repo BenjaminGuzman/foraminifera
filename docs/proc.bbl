@@ -1,0 +1,121 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 3.0 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated by
+% biber as required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+
+\refsection{0}
+  \datalist[entry]{nty/global//global/global}
+    \entry{opencvlibrary}{article}{}
+      \name{author}{1}{}{%
+        {{hash=7cb92723a011baf2e0abeeb403d03960}{%
+           family={Bradski},
+           familyi={B\bibinitperiod},
+           given={G.},
+           giveni={G\bibinitperiod}}}%
+      }
+      \strng{namehash}{7cb92723a011baf2e0abeeb403d03960}
+      \strng{fullhash}{7cb92723a011baf2e0abeeb403d03960}
+      \strng{bibnamehash}{7cb92723a011baf2e0abeeb403d03960}
+      \strng{authorbibnamehash}{7cb92723a011baf2e0abeeb403d03960}
+      \strng{authornamehash}{7cb92723a011baf2e0abeeb403d03960}
+      \strng{authorfullhash}{7cb92723a011baf2e0abeeb403d03960}
+      \field{sortinit}{B}
+      \field{sortinithash}{8de16967003c7207dae369d874f1456e}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Dr. Dobb's Journal of Software Tools}
+      \field{title}{{The OpenCV Library}}
+      \field{year}{2000}
+      \keyw{bibtex-import}
+    \endentry
+    \entry{ncstate2019}{article}{}
+      \name{author}{10}{}{%
+        {{hash=ea453791f76fde1a0747833b2bdfa9dc}{%
+           family={Mitra},
+           familyi={M\bibinitperiod},
+           given={R},
+           giveni={R\bibinitperiod}}}%
+        {{hash=b09b48d71b2ccbdbc1c92995688572cc}{%
+           family={Marchitto},
+           familyi={M\bibinitperiod},
+           given={TM},
+           giveni={T\bibinitperiod}}}%
+        {{hash=ce3bed66bb65d9b50f7ee9a9b4dc6d27}{%
+           family={Ge},
+           familyi={G\bibinitperiod},
+           given={Q},
+           giveni={Q\bibinitperiod}}}%
+        {{hash=b63e7329c4f60681935a1b67124cc467}{%
+           family={Zhong},
+           familyi={Z\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=755f4bccf97543c346766bd643ebd8b9}{%
+           family={Kanakiya},
+           familyi={K\bibinitperiod},
+           given={B},
+           giveni={B\bibinitperiod}}}%
+        {{hash=a6afe019da534f5e020aaccb61b190b6}{%
+           family={Cook},
+           familyi={C\bibinitperiod},
+           given={MS},
+           giveni={M\bibinitperiod}}}%
+        {{hash=21cfb46b3a13ac2edf7c003b4e2a7668}{%
+           family={Fehrenbacher},
+           familyi={F\bibinitperiod},
+           given={JS},
+           giveni={J\bibinitperiod}}}%
+        {{hash=ec911d75ffbe62643e8e6d4625cf81c4}{%
+           family={Ortiz},
+           familyi={O\bibinitperiod},
+           given={JD},
+           giveni={J\bibinitperiod}}}%
+        {{hash=28f5145b694f6f34754fc8a31a2ff186}{%
+           family={Tripati},
+           familyi={T\bibinitperiod},
+           given={A},
+           giveni={A\bibinitperiod}}}%
+        {{hash=ae0891dbe875d3c3b2f1304c700acf4c}{%
+           family={Lobaton},
+           familyi={L\bibinitperiod},
+           given={E},
+           giveni={E\bibinitperiod}}}%
+      }
+      \list{publisher}{1}{%
+        {Elsevier}%
+      }
+      \strng{namehash}{4a0ae7082663b35f7d2b0fcda4696cc3}
+      \strng{fullhash}{737e983ee1e057531cd3dd65fccf0cfe}
+      \strng{bibnamehash}{4a0ae7082663b35f7d2b0fcda4696cc3}
+      \strng{authorbibnamehash}{4a0ae7082663b35f7d2b0fcda4696cc3}
+      \strng{authornamehash}{4a0ae7082663b35f7d2b0fcda4696cc3}
+      \strng{authorfullhash}{737e983ee1e057531cd3dd65fccf0cfe}
+      \field{sortinit}{M}
+      \field{sortinithash}{2e5c2f51f7fa2d957f3206819bf86dc3}
+      \field{labelnamesource}{author}
+      \field{labeltitlesource}{title}
+      \field{journaltitle}{Marine Micropaleontology}
+      \field{title}{Automated species-level identification of planktic foraminifera using convolutional neural networks, with comparison to human performance}
+      \field{volume}{147}
+      \field{year}{2019}
+      \field{pages}{16\bibrangedash 24}
+      \range{pages}{9}
+    \endentry
+  \enddatalist
+\endrefsection
+\endinput
+
